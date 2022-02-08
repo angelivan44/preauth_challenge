@@ -10,11 +10,11 @@ export class Item {
     }
 }
 
-export abstract class LimitsItem {
+export abstract class AbstracItemUpdate {
     abstract updateQualityAndSellin(item: Item): Item;
 }
 
-export class Legendary extends LimitsItem {
+export class Legendary extends AbstracItemUpdate {
     updateQualityAndSellin(item:Item) : Item {
         item.sellIn = 0;
         item.quality = 80;
@@ -22,7 +22,7 @@ export class Legendary extends LimitsItem {
     }
 }
 
-export class Brie extends LimitsItem {
+export class Brie extends AbstracItemUpdate {
     updateQualityAndSellin(item:Item): Item{
         item.quality < 50 ? item.quality++ : item.quality = 50;
         item.sellIn = item.sellIn - 1;
@@ -30,7 +30,7 @@ export class Brie extends LimitsItem {
     }
 }
 
-export class Backstage extends LimitsItem {
+export class Backstage extends AbstracItemUpdate {
     updateQualityAndSellin(item:Item): Item{
         switch (true) {
             case (item.sellIn > 10):
@@ -51,7 +51,7 @@ export class Backstage extends LimitsItem {
     }
 }
 
-export class Conjured extends LimitsItem {
+export class Conjured extends AbstracItemUpdate {
     updateQualityAndSellin(item:Item): Item {
         item.quality > 0 ? item.quality-= 2 : item.quality = 0;
         item.sellIn = item.sellIn - 1;
@@ -59,7 +59,7 @@ export class Conjured extends LimitsItem {
     }
 }
 
-export class Standar extends LimitsItem {
+export class Standar extends AbstracItemUpdate {
     updateQualityAndSellin(item:Item): Item {
         item.quality > 0 ? item.quality=item.quality-1 : item.quality = 0;
         item.sellIn = item.sellIn - 1;
@@ -69,7 +69,7 @@ export class Standar extends LimitsItem {
 
 export class GildedRose  {
     items: Array<Item>;
-    setFunctionsUpdate:{[name:string]:LimitsItem}
+    setFunctionsUpdate:{[name:string]:AbstracItemUpdate}
 
     constructor(items = [] as Array<Item>) {
         this.items = items;
